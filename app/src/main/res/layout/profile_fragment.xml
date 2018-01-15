@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/b2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Name:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/customerProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Customer Profile:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Email:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/contactNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Contact Number:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/contractorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Contractor Name:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/PAN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="PAN Number:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/GSTIN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="GSTIN:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/customerSite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Customer Site:"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+</LinearLayout>
