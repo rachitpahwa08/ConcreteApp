@@ -32,7 +32,7 @@
             android:hint="Customer Site"
             android:inputType="textPersonName" />
         <Spinner
-            android:id="@+id/PO"
+            android:id="@+id/PO_orderbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -59,8 +59,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
                 android:gravity="bottom"
-                android:text="Quality:
-"
+                android:text="Quality:"
                 android:textSize="18sp" />
 
             <Spinner
@@ -76,29 +75,15 @@
                 />
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/special"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Special Concrete" />
-
-        <EditText
-            android:id="@+id/SubQuality"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="SubQuality"
-            android:inputType="textPersonName" />
-
         <Button
             android:id="@+id/Confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#E74C3C"
-            android:text="Confirm Order"
+            android:text=" Confirm Order "
             android:textColor="#fff"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

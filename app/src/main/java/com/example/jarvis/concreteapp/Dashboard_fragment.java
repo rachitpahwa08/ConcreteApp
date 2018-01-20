@@ -44,10 +44,12 @@ public class Dashboard_fragment extends Fragment {
             }
         });
         Button order_book = (Button) rootView.findViewById(R.id.order_book);
+        final Result res1=((DashBoard)getActivity()).r;
         order_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), OrderBook.class);
+                intent.putExtra("Result",res1);
                 startActivity(intent);
             }
         });
