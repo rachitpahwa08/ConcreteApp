@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/Date"
+            android:id="@+id/Date_required_orderbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -23,20 +23,13 @@
             android:hint="Date When Required"
             android:inputType="date" />
 
-        <EditText
-            android:id="@+id/Time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Time"
-            android:inputType="time" />
 
         <EditText
-            android:id="@+id/Location"
+            android:id="@+id/Location_orderbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Location "
+            android:hint="Customer Site"
             android:inputType="textPersonName" />
         <Spinner
             android:id="@+id/PO"
@@ -46,23 +39,42 @@
             android:ems="10"
             android:entries="@array/purchase_order"
             android:prompt="@string/Qual" />
+
         <EditText
-            android:id="@+id/Quantity"
+            android:id="@+id/Quantity_orderbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="Quantity"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
 
-        <Spinner
-            android:id="@+id/Quality"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:entries="@array/grade"
-            android:prompt="@string/Qual" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                android:text="Quality:
+"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Quality_orderbook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:entries="@array/grade"
+                android:gravity="top"
+                android:prompt="@string/Qual"
+                />
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/special"
@@ -85,7 +97,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#E74C3C"
-            android:onClick="onClick"
             android:text="Confirm Order"
             android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"

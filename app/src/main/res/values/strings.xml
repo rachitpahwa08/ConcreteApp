@@ -55,6 +55,13 @@
         <item>Unsafe Condition</item>
         <item>Delay in Delivery</item>
     </string-array>
+    <string-array name="Quality_Type">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
     <string-array name="listofplant">
         <item>Plant 1</item>
         <item>Plant 2</item>

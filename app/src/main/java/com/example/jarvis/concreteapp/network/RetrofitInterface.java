@@ -36,18 +36,14 @@ public interface RetrofitInterface {
     @POST("/login")
     Call<Result>login(@Field(value="username",encoded = true) String username,@Field(value="password",encoded = true) String password);
 
+    @FormUrlEncoded
+    @POST("/requestquote")
+    Call<ResponseBody>quote_request(@FieldMap Map<String,String> map);
 
-
-
-    /*@GET("users/{email}")
-    Observable<User> getProfile(@Path("email") String email);
-
-    @PUT("users/{email}")
-    Observable<Response> changePassword(@Path("email") String email, @Body User user);
-
-    @POST("users/{email}/password")
-    Observable<Response> resetPasswordInit(@Path("email") String email);
-
-    @POST("users/{email}/password")
-    Observable<Response> resetPasswordFinish(@Path("email") String email, @Body User user);*/
+    @FormUrlEncoded
+    @POST("/createpo")
+    Call<ResponseBody>create_po(@FieldMap Map<String,String> map);
+    @FormUrlEncoded
+    @POST("/addorder")
+    Call<ResponseBody>submit_order(@FieldMap Map<String,String> map);
 }

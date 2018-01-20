@@ -92,26 +92,6 @@ public class LoginActivity extends AppCompatActivity {
         context = this.getApplicationContext();
         cb_remember_me = (CheckBox) findViewById(R.id.cb_remember);
 
-
-        /*mEmailView.setText(SharedPreferencesHandler.getString(context, "username"));
-        mPasswordView.setText(SharedPreferencesHandler.getString(context, "password"));*/
-        //initSharedPreferences();
-        /*mAuth=FirebaseAuth.getInstance();
-        // Set up the login form.
-
-        mAuthListener=new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                if(firebaseAuth.getCurrentUser() != null){
-
-                    finish();
-                     startActivity(new Intent(LoginActivity.this,DashBoard.class));
-                }
-            }
-        };*/
-
-
         signin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -226,10 +206,11 @@ public class LoginActivity extends AppCompatActivity {
 
               result=  response.body(); // have your all data
                User user =result.getUser();
-               String id=user.getId();
-                 Toast.makeText(LoginActivity.this,"login Successful"+id,Toast.LENGTH_SHORT).show();
+              String id=user.getId();
+                 Toast.makeText(LoginActivity.this,id,Toast.LENGTH_SHORT).show();
                    progressBar.setVisibility(View.GONE);
                    Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
+               Log.e("TAG", "response 33: "+response.body());
                    Intent intent=new Intent(LoginActivity.this,DashBoard.class);
                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    intent.putExtra("Result",result);
@@ -250,7 +231,7 @@ Result getResult()
 }
 
 
-void signUp(View view)
+void SignUp(View view)
 {
     Intent intent=new Intent(LoginActivity.this,SignUp.class);
     startActivity(intent);

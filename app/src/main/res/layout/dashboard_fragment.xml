@@ -52,5 +52,17 @@
         android:gravity="center"
         android:text="Quality \u0026 Quantity"
         android:textColor="#fff"
-        android:textSize="12sp" />="@+id/2" />
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/quote_request"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/order_book"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:text="Request Quote"
+        android:textColor="#fff" />
 </RelativeLayout>

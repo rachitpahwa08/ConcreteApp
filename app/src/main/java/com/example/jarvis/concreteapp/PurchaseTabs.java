@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class PurchaseTabs extends FragmentStatePagerAdapter {
 
-    String[] titles=new String[]{"Ask for Quote","Available Quote"};
+    String[] titles=new String[]{"Create PO","Available PO"};
 
     public PurchaseTabs(FragmentManager fm) {
         super(fm);

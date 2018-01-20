@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -114,7 +115,7 @@ public static Retrofit retrofit=builder.build();
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast.makeText(SignUp.this,response.message(),Toast.LENGTH_LONG).show();
+                Toast.makeText(SignUp.this,new Gson().toJson(response.body()),Toast.LENGTH_LONG).show();
             }
 
             @Override
