@@ -36,13 +36,6 @@
     <string name="action_settings">Settings</string>
     <string name="Qual">Quality</string>
     <string name="Issue">Category</string>
-    <string-array name="grade">
-        <item>Grade A</item>
-        <item>Grade B</item>
-        <item>Grade C</item>
-        <item>Grade D</item>
-        <item>Grade E</item>
-    </string-array>
     <string-array name="purchase_order">
         <item>Select PO</item>
         <item>Acc</item>
@@ -50,21 +43,36 @@
         <item>Ambuja</item>
     </string-array>
     <string-array name="categoryiss">
+        <item>Select Issue</item>
         <item>Quantity</item>
         <item>Quality</item>
         <item>Unsafe Condition</item>
         <item>Delay in Delivery</item>
     </string-array>
     <string-array name="Quality_Type">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
+        <item>M05</item>
+        <item>M7.5</item>
+        <item>M10</item>
+        <item>M15</item>
+        <item>M20</item>
+        <item>M25</item>
+        <item>M30</item>
+        <item>M35</item>
+        <item>M40</item>
+        <item>M45</item>
+        <item>M50</item>
+        <item>M55</item>
+        <item>M60</item>
+        <item>M65</item>
+        <item>M70</item>
+        <item>M75</item>
+        <item>M80</item>
+        <item>M85</item>
+        <item>M90</item>
+        <item>M95</item>
+        <item>M100</item>
     </string-array>
     <string-array name="listofplant">
-        <item>Plant 1</item>
-        <item>Plant 2</item>
-        <item>Plant 3</item>
+        <item>Select Site</item>
     </string-array>
 </resources>

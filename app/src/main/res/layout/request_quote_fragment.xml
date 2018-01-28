@@ -1,8 +1,7 @@
-<LinearLayout android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
@@ -23,10 +22,10 @@
                     android:id="@+id/textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PO Valid Till" />
+                    android:text="Valid Till" />
 
                 <EditText
-                    android:id="@+id/valid_date"
+                    android:id="@+id/quote_valid_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -45,7 +44,7 @@
                     android:text="Quantity" />
 
                 <EditText
-                    android:id="@+id/quantity"
+                    android:id="@+id/quote_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -64,7 +63,7 @@
                     android:text="Quality" />
 
                 <Spinner
-                    android:id="@+id/quality_spinner"
+                    android:id="@+id/quote_qualtiy_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -75,25 +74,7 @@
                     android:entries="@array/Quality_Type" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
 
-                <TextView
-                    android:id="@+id/pri"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price" />
-
-                <EditText
-                    android:id="@+id/price_PO"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:inputType="numberDecimal" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,19 +85,23 @@
                     android:id="@+id/site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customer Site" />
+                    android:text="Customer Site"
+                    android:layout_marginTop="12dp"/>
 
-                <EditText
-                    android:id="@+id/customer_site"
+                <Spinner
+                    android:id="@+id/customer_site_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp" />
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="0.05"
+                    android:ems="10"
+                    android:entries="@array/listofplant" />
             </LinearLayout>
 
-
             <Button
-                android:id="@+id/submit_createPO"
+                android:id="@+id/submit_quote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -128,6 +113,4 @@
                 android:textColor="#fff"/>
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

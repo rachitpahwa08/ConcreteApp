@@ -15,8 +15,13 @@
             android:id="@+id/purchase"
             android:title="Purchase" />
         <item
+            android:id="@+id/site"
+            android:title="Customer Site"
+            />
+        <item
             android:id="@+id/issue"
             android:title="Issue"/>
+
         <item
             android:id="@+id/logout"
             android:title="Logout"/>

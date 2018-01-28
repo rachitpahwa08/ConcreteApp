@@ -5,30 +5,27 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by Jarvis on 05-01-2018.
+ * Created by Jarvis on 21-01-2018.
  */
 
-public class PurchaseTabs extends FragmentStatePagerAdapter {
-
-    String[] titles=new String[]{"Create PO","Available PO"};
-
-    public PurchaseTabs(FragmentManager fm) {
+public class QuoteTabs extends FragmentStatePagerAdapter
+{
+    String[] titles=new String[]{"Request Quote","Available Quotes"};
+    public QuoteTabs(FragmentManager fm) {
         super(fm);
     }
-
     @Override
     public CharSequence getPageTitle(int position) {
         return titles[position];
     }
-
     @Override
     public Fragment getItem(int position) {
         switch (position)
         {
-            case 0: AskQuote askQuote=new AskQuote();
-                return askQuote;
-            case 1: AvailablePO availablePO=new AvailablePO();
-                return availablePO;
+            case 0: RequestQuoteFragment requestQuoteFragment=new RequestQuoteFragment();
+                return requestQuoteFragment;
+            case 1: AvailableQuote availableQuote=new AvailableQuote();
+                return availableQuote;
 
             default:return null;
         }

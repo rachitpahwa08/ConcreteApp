@@ -24,18 +24,20 @@
             android:inputType="date" />
 
 
-        <EditText
+        <Spinner
             android:id="@+id/Location_orderbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="Customer Site"
-            android:inputType="textPersonName" />
+            android:entries="@array/listofplant"
+            android:prompt="@string/Qual" />
+
         <Spinner
             android:id="@+id/PO_orderbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:ems="10"
             android:entries="@array/purchase_order"
             android:prompt="@string/Qual" />
@@ -69,7 +71,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:entries="@array/grade"
+                android:entries="@array/Quality_Type"
                 android:gravity="top"
                 android:prompt="@string/Qual"
                 />

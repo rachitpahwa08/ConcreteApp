@@ -5,6 +5,8 @@ package com.example.jarvis.concreteapp.network;
  */
 
 
+import com.example.jarvis.concreteapp.model.History;
+import com.example.jarvis.concreteapp.model.PO;
 import com.example.jarvis.concreteapp.model.Response;
 import com.example.jarvis.concreteapp.model.Result;
 import com.example.jarvis.concreteapp.model.User;
@@ -41,9 +43,51 @@ public interface RetrofitInterface {
     Call<ResponseBody>quote_request(@FieldMap Map<String,String> map);
 
     @FormUrlEncoded
+    @POST("/cancelquote")
+    Call<ResponseBody>cancel_quote(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
     @POST("/createpo")
     Call<ResponseBody>create_po(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/deletepo")
+    Call<ResponseBody>delete_po(@FieldMap Map<String,String> map);
+
     @FormUrlEncoded
     @POST("/addorder")
     Call<ResponseBody>submit_order(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/cancelorder")
+    Call<ResponseBody>cancel_order(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/addissue")
+    Call<ResponseBody>add_issue(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/addsite")
+    Call<ResponseBody>add_site(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/deletesite")
+    Call<ResponseBody>delete_site(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/profile")
+    Call<ResponseBody>edit_profile(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/history")
+    Call<Result>history(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/allpo")
+    Call<Result>getpo(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
+    @POST("/forgot")
+    Call<ResponseBody>forgot_pass(@FieldMap Map<String,String> map);
+
 }

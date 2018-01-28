@@ -46,7 +46,18 @@
         <activity
             android:name=".OrderBook"
             android:parentActivityName=".DashBoard" />
-        <activity android:name=".RequestQuote"></activity>
+        <activity
+            android:name=".RequestQuote"
+            android:label="Quote" />
+        <activity
+            android:name=".AddSite"
+            android:label="Add Site" />
+        <activity
+            android:name=".POdetails"
+            android:label="PO Information" />
+        <activity android:name=".HistoryInfo" />
+        <activity android:name=".Issues" />
+        <activity android:name=".QuoteInfo"></activity>
     </application>
 
 </manifest>

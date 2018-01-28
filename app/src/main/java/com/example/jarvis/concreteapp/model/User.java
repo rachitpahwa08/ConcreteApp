@@ -38,10 +38,10 @@ public class User implements Parcelable {
     private String userType;
     @SerializedName("__v")
     @Expose
-    private Integer v;
+    private Integer v=1;
     @SerializedName("customerSite")
     @Expose
-    private List<Object> customerSite = null;
+    private List<CustomerSite> customerSite = null;
 
     public String getId() {
         return id;
@@ -115,11 +115,11 @@ public class User implements Parcelable {
         this.v = v;
     }
 
-    public List<Object> getCustomerSite() {
+    public List<CustomerSite> getCustomerSite() {
         return customerSite;
     }
 
-    public void setCustomerSite(List<Object> customerSite) {
+    public void setCustomerSite(List<CustomerSite> customerSite) {
         this.customerSite = customerSite;
     }
 
@@ -155,8 +155,8 @@ public class User implements Parcelable {
         this.password = in.readString();
         this.userType = in.readString();
         this.v = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.customerSite = new ArrayList<Object>();
-        in.readList(this.customerSite, Object.class.getClassLoader());
+        this.customerSite = new ArrayList<CustomerSite>();
+        in.readList(this.customerSite, CustomerSite.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

@@ -3,6 +3,7 @@ package com.example.jarvis.concreteapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,18 +26,22 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Result;
 import com.example.jarvis.concreteapp.model.User;
+import com.example.jarvis.concreteapp.utils.SessionManagement;
+
 import static android.R.attr.fragment;
 
 public class DashBoard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 Result r;
+    boolean doubleBackToExitPressedOnce = false;
+    SessionManagement session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        session = new SessionManagement(getApplicationContext());
         Intent i=getIntent();
         r=i.getParcelableExtra("Result");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -49,13 +55,14 @@ Result r;
        // View headerView = navigationView.getHeaderView(0);
         //navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
-        TextView name = (TextView)header.findViewById(R.id.user_name);
-        name.setText(r.getUser().getName());
+        //Log.e("TAG", "response 33: " +r.getUser().getName() );
+        //TextView name = (TextView)header.findViewById(R.id.user_name);
+        //name.setText(r.getUser().getName());
         navigationView.setCheckedItem(R.id.dashboard);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.screen_area,new Dashboard_fragment());
         ft.commit();
-        Toast.makeText(DashBoard.this,r.getUser().getId(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(DashBoard.this,r.getUser().getId(),Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -63,9 +70,25 @@ Result r;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        else if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        else {
+            //super.onBackPressed();
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+
     }
 
     @Override
@@ -106,7 +129,10 @@ Result r;
              fragment=new History_fragment();
         } else if (id == R.id.purchase) {
              fragment=new Purchase_fragment();
-        } else if (id == R.id.issue) {
+        }else if (id == R.id.site) {
+            fragment=new SiteFragment();
+        }
+        else if (id == R.id.issue) {
              fragment=new Issue_fragment();
         } else if (id == R.id.logout) {
             new AlertDialog.Builder(this)
@@ -117,10 +143,8 @@ Result r;
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //FirebaseAuth.getInstance().signOut();
-                            Intent i = new Intent(DashBoard.this, LoginActivity.class);
-                            i.setFlags(i.FLAG_ACTIVITY_NEW_TASK | i.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i); // Launch the Homescreen Activity
-                            finish();         // Close down the SettingsActivity
+                            session.logoutUser();
+                                     // Close down the SettingsActivity
                         }
 
                     })

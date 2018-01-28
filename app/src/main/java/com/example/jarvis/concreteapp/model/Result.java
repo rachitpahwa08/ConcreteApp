@@ -16,15 +16,40 @@ public class Result implements Parcelable {
     @SerializedName("user")
     @Expose
     private User user;
+    @SerializedName("POs")
+    @Expose
+    private List<PO> pOs = null;
     @SerializedName("orders")
     @Expose
-    private List<Object> orders = null;
+    private List<Order> orders = null;
     @SerializedName("issues")
     @Expose
-    private List<Object> issues = null;
+    private List<Issue> issues = null;
     @SerializedName("quotes")
     @Expose
-    private List<Object> quotes = null;
+    private List<Quote> quotes = null;
+    @SerializedName("success")
+    @Expose
+    private Boolean success;
+    @SerializedName("msg")
+    @Expose
+    private Msg msg;
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public Msg getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Msg msg) {
+        this.msg = msg;
+    }
 
     public User getUser() {
         return user;
@@ -33,28 +58,34 @@ public class Result implements Parcelable {
     public void setUser(User user) {
         this.user = user;
     }
+    public List<PO> getPOs() {
+        return pOs;
+    }
+    public void setPOs(List<PO> pOs) {
+        this.pOs = pOs;
+    }
 
-    public List<Object> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Object> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
-    public List<Object> getIssues() {
+    public List<Issue> getIssues() {
         return issues;
     }
 
-    public void setIssues(List<Object> issues) {
+    public void setIssues(List<Issue> issues) {
         this.issues = issues;
     }
 
-    public List<Object> getQuotes() {
+    public List<Quote> getQuotes() {
         return quotes;
     }
 
-    public void setQuotes(List<Object> quotes) {
+    public void setQuotes(List<Quote> quotes) {
         this.quotes = quotes;
     }
 
@@ -68,7 +99,7 @@ public class Result implements Parcelable {
         dest.writeParcelable(this.user, flags);
         dest.writeList(this.orders);
         dest.writeList(this.issues);
-        dest.writeList(this.quotes);
+        dest.writeTypedList(this.quotes);
     }
 
     public Result() {
@@ -76,12 +107,11 @@ public class Result implements Parcelable {
 
     protected Result(Parcel in) {
         this.user = in.readParcelable(User.class.getClassLoader());
-        this.orders = new ArrayList<Object>();
-        in.readList(this.orders, Object.class.getClassLoader());
-        this.issues = new ArrayList<Object>();
-        in.readList(this.issues, Object.class.getClassLoader());
-        this.quotes = new ArrayList<Object>();
-        in.readList(this.quotes, Object.class.getClassLoader());
+        this.orders = new ArrayList<Order>();
+        in.readList(this.orders, Order.class.getClassLoader());
+        this.issues = new ArrayList<Issue>();
+        in.readList(this.issues, Issue.class.getClassLoader());
+        this.quotes = in.createTypedArrayList(Quote.CREATOR);
     }
 
     public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
@@ -95,4 +125,19 @@ public class Result implements Parcelable {
             return new Result[size];
         }
     };
+    public class Msg {
+
+        @SerializedName("passmsg")
+        @Expose
+        private String passmsg;
+
+        public String getPassmsg() {
+            return passmsg;
+        }
+
+        public void setPassmsg(String passmsg) {
+            this.passmsg = passmsg;
+        }
+
+    }
 }

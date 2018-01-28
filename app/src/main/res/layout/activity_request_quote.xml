@@ -6,129 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.jarvis.concreteapp.RequestQuote">
-    <ScrollView
+    <android.support.design.widget.TabLayout
+        android:id="@+id/quote_tab"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <android.support.design.widget.TabItem
+            android:id="@+id/request_quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request Quote" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Generation Date" />
-
-                <EditText
-                    android:id="@+id/quote_start_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="12dp"
-                    android:inputType="date"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Valid Till" />
-
-                <EditText
-                    android:id="@+id/quote_valid_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/quan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quantity" />
-
-                <EditText
-                    android:id="@+id/quote_quantity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
-
-                <TextView
-                    android:id="@+id/qual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quality" />
-
-                <Spinner
-                    android:id="@+id/quote_qualtiy_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_weight="0.05"
-                    android:ems="10"
-                    android:entries="@array/Quality_Type" />
-            </LinearLayout>
+        <android.support.design.widget.TabItem
+            android:id="@+id/available_quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Quote" />
 
 
+    </android.support.design.widget.TabLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/quote_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/site"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Customer Site" />
-
-                <EditText
-                    android:id="@+id/quote_customer_site"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/submit_quote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Submit"
-                android:textColor="#fff"/>
-        </LinearLayout>
-    </ScrollView>
+    </android.support.v4.view.ViewPager>
 </LinearLayout>
