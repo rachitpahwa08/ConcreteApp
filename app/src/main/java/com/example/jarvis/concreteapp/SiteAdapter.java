@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.CustomerSite;
 import com.example.jarvis.concreteapp.model.User;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,14 +34,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
     Gson gson = new GsonBuilder().create();
-    Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175").addConverterFactory(GsonConverterFactory.create(gson));
+    Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
     Retrofit retrofit=builder.build();
     RetrofitInterface retrofitInterface=retrofit.create(RetrofitInterface.class);
 private List<CustomerSite> siteList;
 private User user;
-    public SiteAdapter(List<CustomerSite> siteList,User user) {
+RelativeLayout relativeLayout;
+
+
+    public SiteAdapter(List<CustomerSite> siteList, User user,RelativeLayout relativeLayout) {
         this.siteList = siteList;
         this.user=user;
+        this.relativeLayout = relativeLayout;
     }
 
     @Override

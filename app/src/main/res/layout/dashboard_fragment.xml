@@ -22,7 +22,7 @@
             android:gravity="center"
             android:onClick="aboutConcrete"
             android:text="About Concrete"
-            android:textColor="#fff"/>
+            android:textColor="#fff" />
 
 
     </GridLayout>

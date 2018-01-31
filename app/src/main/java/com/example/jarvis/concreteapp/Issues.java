@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Order;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Issues extends AppCompatActivity {
     private EditText issue_title,issue_desc;
     private Spinner issue_type;
-    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175")
+    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
     @Override

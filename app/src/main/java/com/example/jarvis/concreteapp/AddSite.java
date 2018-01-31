@@ -1,16 +1,22 @@
 package com.example.jarvis.concreteapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.User;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
+import com.example.jarvis.concreteapp.utils.Validation;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -25,9 +31,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddSite extends AppCompatActivity {
     User user;
-    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175")
+    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
+    LinearLayout linearLayout;
     EditText sitename,site_address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class AddSite extends AppCompatActivity {
         sitename=(EditText) findViewById(R.id.sitename);
         site_address=(EditText) findViewById(R.id.site_address);
         Button submit=(Button)findViewById(R.id.submit_site);
-
+        linearLayout=(LinearLayout)findViewById(R.id.addsite_layout);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,9 +83,14 @@ public class AddSite extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast.makeText(AddSite.this,new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddSite.this,new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar
+                        .make(linearLayout, "Site Added Successfully", Snackbar.LENGTH_LONG);
+                snackbar.setActionTextColor(Color.RED);
+                snackbar.show();
                 Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
-
+                DirectingClass directingClass=new DirectingClass(getApplicationContext(),AddSite.this);
+                directingClass.performLogin();
 
             }
 

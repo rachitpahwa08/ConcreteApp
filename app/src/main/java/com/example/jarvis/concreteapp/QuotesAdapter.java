@@ -51,7 +51,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.ViewHolder
             public void onClick(View view) {
                 Intent i=new Intent(view.getContext(),QuoteInfo.class);
                 i.putExtra("quote", quoteList.get(position));
-                i.putExtra("customersite_quote",getSitename(customerSite.get(position).getId()));
+                i.putExtra("customersite_quote",getSitename(quoteList.get(position).getCustomerSite()));
                 view.getContext().startActivity(i);
             }
         });
@@ -79,10 +79,10 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.ViewHolder
    { int position1=0;
     for(int i=0;i<customerSite.size();i++)
     {
-        if(id==customerSite.get(i).getId())
+        if(id.equals(customerSite.get(i).getId()))
         {
             position1=i;
-            Log.e("TAG", "response 33: "+customerSite.get(i).getId()+"id="+id);
+            Log.e("TAG", "response 33: "+customerSite.get(i).getId()+"id="+id+"position1="+position1+"customersite"+customerSite.get(position1).getName());
         }
     }
 

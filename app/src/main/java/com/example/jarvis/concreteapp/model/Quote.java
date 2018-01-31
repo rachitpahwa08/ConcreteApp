@@ -40,7 +40,7 @@ public class Quote implements Parcelable {
     private Integer v;
     @SerializedName("responses")
     @Expose
-    private List<Object> responses = null;
+    private List<Response> responses = null;
 
     public String getId() {
         return id;
@@ -114,13 +114,14 @@ public class Quote implements Parcelable {
         this.v = v;
     }
 
-    public List<Object> getResponses() {
+    public List<Response> getResponses() {
         return responses;
     }
 
-    public void setResponses(List<Object> responses) {
+    public void setResponses(List<Response> responses) {
         this.responses = responses;
     }
+
 
     @Override
     public int describeContents() {
@@ -154,11 +155,11 @@ public class Quote implements Parcelable {
         this.requestedBy = in.readString();
         this.requestedById = in.readString();
         this.v = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.responses = new ArrayList<Object>();
-        in.readList(this.responses, Object.class.getClassLoader());
+        this.responses = new ArrayList<Response>();
+        in.readList(this.responses, Response.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Quote> CREATOR = new Parcelable.Creator<Quote>() {
+    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
         @Override
         public Quote createFromParcel(Parcel source) {
             return new Quote(source);

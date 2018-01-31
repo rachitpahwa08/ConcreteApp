@@ -3,6 +3,7 @@ package com.example.jarvis.concreteapp;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             public void onClick(View view) {
                 Intent i=new Intent(view.getContext(),HistoryInfo.class);
                 i.putExtra("Order", order);
-                i.putExtra("ordersite",getSitename(my_data.get(position).getId()));
+                i.putExtra("ordersite",getSitename(my_data.get(position).getCustomerSite()));
                 view.getContext().startActivity(i);
             }
         });
@@ -83,15 +84,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         }
     }
     String getSitename(String id)
-    { int position1;
+    { int position1=0;
         for(int i=0;i<customerSite.size();i++)
-        {
-            if(id==customerSite.get(i).getId())
+        {Log.e("TAG", "response 33: "+customerSite.get(i).getId()+"id="+id+"position1="+position1+"customersite"+customerSite.get(position1).getName());
+            if(id.equals(customerSite.get(i).getId()))
             {
                 position1=i;
-                return customerSite.get(position1).getName();
+                Log.e("TAG", "response 33: "+customerSite.get(i).getId()+"id="+id+"position1="+position1+"customersite"+customerSite.get(position1).getName());
+                break;
+
             }
         }
-        return "Null";
+
+        return customerSite.get(position1).getName();
     }
 }

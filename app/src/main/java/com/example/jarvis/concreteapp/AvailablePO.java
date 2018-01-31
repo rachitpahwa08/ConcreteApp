@@ -14,10 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.PO;
-import com.example.jarvis.concreteapp.model.Response;
+
 import com.example.jarvis.concreteapp.model.Result;
 import com.example.jarvis.concreteapp.model.User;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,7 +41,7 @@ public class AvailablePO extends Fragment {
 
     Result r1;
     Gson gson = new GsonBuilder().create();
-    Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175").addConverterFactory(GsonConverterFactory.create(gson));
+    Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
     Retrofit retrofit=builder.build();
     RetrofitInterface retrofitInterface=retrofit.create(RetrofitInterface.class);
     private RecyclerView recyclerView;
@@ -74,25 +75,7 @@ public class AvailablePO extends Fragment {
             }
 
         });
-        /*Call<Result> call=retrofitInterface.login(r1.getUser().getEmail(),"1234");
-        call.enqueue(new Callback<Result>() {
-            @Override
-            public void onResponse(Call<Result> call, retrofit2.Response<Result> response) {
 
-                Result r=  response.body(); // have your all data
-
-                Log.e("TAG", "response 33: " + new Gson().toJson(response.body()));
-                Log.e("TAG", "response 33: " + response.body());
-                PoAdapter poAdapter=new PoAdapter(r.getPOs());
-                recyclerView.setAdapter(poAdapter);
-
-            }
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });*/
         return view;
     }
 }

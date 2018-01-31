@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Result;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -36,9 +39,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AskQuote extends Fragment {
 
-    private EditText validtill,quantity,customersite,supplierID,price;
-    Spinner quality;
-    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175")
+    private EditText validtill,quantity,price;
+    Spinner quality,customersite,supplier;
+    String cust_id,supp_id;
+    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
     @Nullable
@@ -49,10 +53,11 @@ public class AskQuote extends Fragment {
 
         validtill=(EditText)view.findViewById(R.id.valid_date);
         quantity=(EditText)view.findViewById(R.id.quantity);
-        customersite=(EditText)view.findViewById(R.id.customer_site);
+        customersite=(Spinner) view.findViewById(R.id.customer_site);
         price=(EditText)view.findViewById(R.id.price_PO);
 
         quality=(Spinner)view.findViewById(R.id.quality_spinner);
+        supplier=(Spinner)view.findViewById(R.id.supplier_spinner);
         Button submit=(Button)view.findViewById(R.id.submit_createPO);
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +65,53 @@ public class AskQuote extends Fragment {
             public void onClick(View view) {
 
                 startPo(resl);
+            }
+        });
+        List<String> list = new ArrayList<String>();
+        ArrayAdapter<String> adapter;
+        for(int j=0;j<resl.getUser().getCustomerSite().size();j++)
+        {
+            list.add(resl.getUser().getCustomerSite().get(j).getName());
+        }
+        adapter = new ArrayAdapter<String>(view.getContext(),
+                android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        customersite.setAdapter(adapter);
+        customersite.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cust_id=resl.getUser().getCustomerSite().get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+        List<String> list1 = new ArrayList<String>();
+        ArrayAdapter<String> adapter1;
+        for(int j=0;j<resl.getQuotes().size();j++)
+        {   if(resl.getQuotes().get(j).getResponses()!=null) {
+            for (int k = 0; k < resl.getQuotes().get(j).getResponses().size(); k++) {
+                list1.add("name=" + resl.getQuotes().get(j).getResponses().get(k).getRmxId() + "price=" + resl.getQuotes().get(j).getResponses().get(k).getPrice());
+            }
+          }
+        }
+        adapter1 = new ArrayAdapter<String>(view.getContext(),
+                android.R.layout.simple_spinner_item, list1);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        supplier.setAdapter(adapter1);
+        supplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
         return view;
@@ -97,7 +149,7 @@ public class AskQuote extends Fragment {
         map.put("quantity",quantity);
         map.put("quality",quality);
         map.put("price",price);
-        map.put("customerSite","5a644a697819df03473a9f87");
+        map.put("customerSite",cust_id);
         map.put("requestedBy",res1.getUser().getName());
         map.put("requestedById",res1.getUser().getId());
         map.put("supplierId","5a522bd3917f08288f4eea1a");
@@ -108,6 +160,8 @@ public class AskQuote extends Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Toast.makeText(getActivity(),new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
                 Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
+                DirectingClass directingClass=new DirectingClass(getContext(),getActivity());
+                directingClass.performLogin();
             }
 
             @Override

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.PO;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -31,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class POdetails extends AppCompatActivity {
     Gson gson = new GsonBuilder().setLenient().create();
-    Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175").addConverterFactory(GsonConverterFactory.create(gson));
+    Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
     Retrofit retrofit=builder.build();
     PO p;
     @Override

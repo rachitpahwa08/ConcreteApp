@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Result;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 import com.example.jarvis.concreteapp.utils.DatePickerFragment;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class RequestQuoteFragment extends android.support.v4.app.Fragment {
     private String cust_id;
     Result res1;
     Spinner quality;
-    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175")
+    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
     @Nullable
@@ -131,6 +133,8 @@ public class RequestQuoteFragment extends android.support.v4.app.Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Toast.makeText(getActivity(),new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
                 Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
+                DirectingClass directingClass=new DirectingClass(getContext(),getActivity());
+                directingClass.performLogin();
             }
 
             @Override

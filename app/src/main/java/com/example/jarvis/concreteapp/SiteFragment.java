@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.jarvis.concreteapp.model.Result;
 
@@ -22,6 +23,7 @@ public class SiteFragment extends Fragment
 {
     Result r1;
     private RecyclerView recyclerView;
+    RelativeLayout relativeLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,11 +38,12 @@ public class SiteFragment extends Fragment
                 startActivity(i);
             }
         });
+        relativeLayout=(RelativeLayout)view.findViewById(R.id.site_layout);
         recyclerView=(RecyclerView)view.findViewById(R.id.siteRecyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
         Result r1=((DashBoard)getActivity()).r;
-        SiteAdapter siteAdapter=new SiteAdapter(r1.getUser().getCustomerSite(),r1.getUser());
+        SiteAdapter siteAdapter=new SiteAdapter(r1.getUser().getCustomerSite(),r1.getUser(),relativeLayout);
         recyclerView.setAdapter(siteAdapter);
         return view;
     }

@@ -32,6 +32,8 @@ public class RequestQuote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_quote);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
         res=i.getParcelableExtra("Result");
         TabLayout tabLayout=(TabLayout) findViewById(R.id.quote_tab);
@@ -41,5 +43,17 @@ public class RequestQuote extends AppCompatActivity {
         viewPager.setAdapter(quoteTabs);
         tabLayout.setupWithViewPager(viewPager);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

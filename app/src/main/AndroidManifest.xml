@@ -24,40 +24,57 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="Login" />
+            android:label="Login"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DashBoard"
             android:label="@string/title_activity_dash_board"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Password_reset"
             android:label="Forgot Password"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUp"
             android:label="SignUp"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AboutConcrete"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:screenOrientation="portrait"
+            android:label="About Concrete"/>
         <activity
             android:name=".Quality"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:screenOrientation="portrait"
+            android:label="Quality and Quantity"/>
         <activity
             android:name=".OrderBook"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:screenOrientation="portrait"
+            android:label="OrderBook"/>
         <activity
             android:name=".RequestQuote"
-            android:label="Quote" />
+            android:label="Quote"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AddSite"
-            android:label="Add Site" />
+            android:label="Add Site"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".POdetails"
-            android:label="PO Information" />
-        <activity android:name=".HistoryInfo" />
-        <activity android:name=".Issues" />
-        <activity android:name=".QuoteInfo"></activity>
+            android:label="PO Information"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HistoryInfo"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Issues"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".QuoteInfo"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

@@ -52,17 +52,17 @@ Result r;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-       // View headerView = navigationView.getHeaderView(0);
-        //navigationView.setNavigationItemSelectedListener(this);
+       View headerView = navigationView.getHeaderView(0);
+        navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
-        //Log.e("TAG", "response 33: " +r.getUser().getName() );
-        //TextView name = (TextView)header.findViewById(R.id.user_name);
-        //name.setText(r.getUser().getName());
+        Log.e("TAG", "response 33: " +r.getUser().getName() );
+        TextView name = (TextView)header.findViewById(R.id.user_name);
+        name.setText(r.getUser().getName());
         navigationView.setCheckedItem(R.id.dashboard);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.screen_area,new Dashboard_fragment());
         ft.commit();
-        //Toast.makeText(DashBoard.this,r.getUser().getId(),Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -75,8 +75,12 @@ Result r;
             super.onBackPressed();
             return;
         }
+
         else {
-            //super.onBackPressed();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+            ft.replace(R.id.screen_area,new Dashboard_fragment());
+            ft.commit();
         }
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
@@ -142,9 +146,8 @@ Result r;
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //FirebaseAuth.getInstance().signOut();
                             session.logoutUser();
-                                     // Close down the SettingsActivity
+
                         }
 
                     })

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Result;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -39,13 +41,14 @@ public class OrderBook extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     Result resl;
     String cust_site;
-    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175")
+    private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_book);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
         resl=i.getParcelableExtra("Result");
@@ -146,6 +149,8 @@ public class OrderBook extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Toast.makeText(OrderBook.this,new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
                 Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
+                DirectingClass directingClass=new DirectingClass(getApplicationContext(),OrderBook.this);
+                directingClass.performLogin();
             }
 
             @Override
@@ -153,5 +158,17 @@ public class OrderBook extends AppCompatActivity {
                 Toast.makeText(OrderBook.this,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

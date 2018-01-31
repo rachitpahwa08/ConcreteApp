@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Quote;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +27,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class QuoteInfo extends AppCompatActivity {
-    Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175").addConverterFactory(GsonConverterFactory.create());
+    Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit=builder.build();
     Quote quote;
     @Override

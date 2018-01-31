@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
+import com.example.jarvis.concreteapp.utils.Constants;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SignUp extends AppCompatActivity {
     private EditText name,mobile,email,password,confirm_password,pan,gstin;
 
-   private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl("http://35.200.128.175").addConverterFactory(GsonConverterFactory.create());
+   private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create());
 public static Retrofit retrofit=builder.build();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -75,7 +75,7 @@ public class PoAdapter extends RecyclerView.Adapter<PoAdapter.PoViewHolder> {
             public void onClick(View view) {
                 Intent i=new Intent(view.getContext(),POdetails.class);
                 i.putExtra("PO", po);
-                i.putExtra("customersite",getSitename(customerSite.get(position).getId()));
+                i.putExtra("customersite",getSitename(poList.get(position).getId()));
                 view.getContext().startActivity(i);
             }
         });
@@ -107,7 +107,7 @@ public class PoAdapter extends RecyclerView.Adapter<PoAdapter.PoViewHolder> {
     { int position1=0;
         for(int i=0;i<customerSite.size();i++)
         {
-            if(id==customerSite.get(i).getId())
+            if(id.equals(customerSite.get(i).getId()))
             {
                 position1=i;
                 break;
