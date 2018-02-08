@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,56 +26,66 @@
         <activity
             android:name=".LoginActivity"
             android:label="Login"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DashBoard"
             android:label="@string/title_activity_dash_board"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Password_reset"
             android:label="Forgot Password"
             android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignUp"
             android:label="SignUp"
             android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AboutConcrete"
+            android:label="About Concrete"
             android:parentActivityName=".DashBoard"
-            android:screenOrientation="portrait"
-            android:label="About Concrete"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Quality"
+            android:label="Quality and Quantity"
             android:parentActivityName=".DashBoard"
-            android:screenOrientation="portrait"
-            android:label="Quality and Quantity"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".OrderBook"
+            android:label="OrderBook"
             android:parentActivityName=".DashBoard"
-            android:screenOrientation="portrait"
-            android:label="OrderBook"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RequestQuote"
             android:label="Quote"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AddSite"
             android:label="Add Site"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".POdetails"
             android:label="PO Information"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HistoryInfo"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Issues"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".QuoteInfo"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HistoryInfo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Issues"
+            android:label="Issue"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuoteInfo"
+            android:label="Quote Information"
+            android:screenOrientation="portrait" />
+        <activity android:name=".EditProfile"
+            android:label="Edit Profile"/>
+        <activity android:name=".Calculator"
+            android:label="Calculator">
+        </activity>
     </application>
 
 </manifest>

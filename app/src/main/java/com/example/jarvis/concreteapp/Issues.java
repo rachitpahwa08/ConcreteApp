@@ -1,19 +1,24 @@
 package com.example.jarvis.concreteapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.example.jarvis.concreteapp.model.Issue;
 import com.example.jarvis.concreteapp.model.Order;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
 import com.example.jarvis.concreteapp.utils.Constants;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -29,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Issues extends AppCompatActivity {
     private EditText issue_title,issue_desc;
     private Spinner issue_type;
+    LinearLayout linearLayout;
     private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
@@ -43,6 +49,7 @@ public class Issues extends AppCompatActivity {
         issue_desc=(EditText)findViewById(R.id.issue_description);
         issue_type=(Spinner)findViewById(R.id.issue_type);
         Button submit=(Button)findViewById(R.id.raise_issue);
+        linearLayout=(LinearLayout)findViewById(R.id.issue);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,11 +75,13 @@ public class Issues extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast.makeText(Issues.this,new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar
+                        .make(linearLayout, "Issue Reported Successfully", Snackbar.LENGTH_LONG);
+                snackbar.setActionTextColor(Color.RED);
+                snackbar.show();
                 Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
-               Intent i=new Intent(Issues.this,History_fragment.class);
-               startActivity(i);
-               finish();
+                DirectingClass directingClass=new DirectingClass(getApplicationContext(),Issues.this);
+                directingClass.performLogin();
             }
 
             @Override

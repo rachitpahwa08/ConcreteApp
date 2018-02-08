@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/podetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/construction"
     android:orientation="vertical"
     tools:context="com.example.jarvis.concreteapp.POdetails">
 
@@ -59,6 +61,7 @@
             android:layout_marginTop="12dp"
             android:text="TextView"
             android:textSize="20sp" />
+
         <TextView
             android:id="@+id/po_site"
             android:layout_width="match_parent"
@@ -97,6 +100,6 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="Delete PO"
-            android:textColor="#fff"/>
+            android:textColor="#fff" />
     </LinearLayout>
 </LinearLayout>

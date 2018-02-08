@@ -1,7 +1,9 @@
 package com.example.jarvis.concreteapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -26,26 +28,29 @@ public class Profile_fragment extends Fragment {
         View view=inflater.inflate(R.layout.profile_fragment,container,false);
 
         Result r1=((DashBoard)getActivity()).r;
-        User u=r1.getUser();
+        final User u=r1.getUser();
         TextView name=(TextView) view.findViewById(R.id.Name);
         TextView customerprofile=(TextView) view.findViewById(R.id.customerProfile);
         TextView email=(TextView) view.findViewById(R.id.email);
         TextView contactNo=(TextView) view.findViewById(R.id.contactNo);
-        //TextView =(TextView) view.findViewById(R.id.contractorName);
         TextView pan=(TextView) view.findViewById(R.id.PAN);
         TextView gst=(TextView)view.findViewById(R.id.GSTIN);
-        TextView customersite=(TextView)view.findViewById(R.id.customerSite);
-
-        name.setText("Name: "+u.getName());
-        customerprofile.setText("Customer Profile: "+u.getUserType());
-        email.setText("Email: "+u.getEmail());
-        contactNo.setText("Contact No.: "+u.getContact());
-        pan.setText("PAN: "+u.getPan());
-        gst.setText("GSTIN: "+u.getGstin());
-
-
-        //return  inflater.inflate(R.layout.profile_fragment,null);
-         return view;
+        FloatingActionButton fab=(FloatingActionButton)view.findViewById(R.id.edit_profile);
+        name.setText(u.getName());
+        customerprofile.setText(u.getUserType());
+        email.setText(u.getEmail());
+        contactNo.setText(String.valueOf(u.getContact()));
+        pan.setText(u.getPan());
+        gst.setText(u.getGstin());
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),EditProfile.class);
+                intent.putExtra("user",u);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 
     @Override

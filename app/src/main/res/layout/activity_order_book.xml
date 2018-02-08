@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/place_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/construction"
     android:orientation="vertical">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,48 +14,97 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/Date_required_orderbook"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ems="10"
-            android:hint="Date When Required"
-            android:inputType="date" />
+            android:layout_height="wrap_content">
 
-
-        <Spinner
-            android:id="@+id/Location_orderbook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:entries="@array/listofplant"
-            android:prompt="@string/Qual" />
-
-        <Spinner
-            android:id="@+id/PO_orderbook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ems="10"
-            android:entries="@array/purchase_order"
-            android:prompt="@string/Qual" />
-
-        <EditText
-            android:id="@+id/Quantity_orderbook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Quantity"
-            android:inputType="numberDecimal" />
+            <EditText
+                android:id="@+id/Date_required_orderbook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:drawableRight="@drawable/ic_date_range_black_24dp"
+                android:editable="false"
+                android:ems="10"
+                android:hint="Date When Required"
+                android:inputType="date" />
+        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                android:text="Site:"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Location_orderbook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:entries="@array/listofplant"
+                android:prompt="@string/Qual" />
+        </LinearLayout>
+        .
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                android:text="Supplier"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/PO_orderbook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:entries="@array/purchase_order"
+                android:prompt="@string/Qual" />
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp">
+
+            <EditText
+                android:id="@+id/Quantity_orderbook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="Quantity"
+                android:inputType="numberDecimal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,19 +124,19 @@
                 android:ems="10"
                 android:entries="@array/Quality_Type"
                 android:gravity="top"
-                android:prompt="@string/Qual"
-                />
+                android:prompt="@string/Qual" />
         </LinearLayout>
 
         <Button
             android:id="@+id/Confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="18dp"
             android:background="#E74C3C"
+            android:gravity="center"
             android:text=" Confirm Order "
             android:textColor="#fff"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

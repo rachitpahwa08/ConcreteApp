@@ -1,17 +1,23 @@
 package com.example.jarvis.concreteapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.PO;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
 import com.example.jarvis.concreteapp.utils.Constants;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -35,10 +41,13 @@ public class POdetails extends AppCompatActivity {
     Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
     Retrofit retrofit=builder.build();
     PO p;
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podetails);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
         String customerSite;
         p=i.getParcelableExtra("PO");
@@ -52,43 +61,62 @@ public class POdetails extends AppCompatActivity {
         status=(TextView)findViewById(R.id.po_status);
         price=(TextView)findViewById(R.id.po_price);
         site=(TextView)findViewById(R.id.po_site);
+        linearLayout=(LinearLayout)findViewById(R.id.podetails);
         Button button=(Button)findViewById(R.id.deletepobutton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                RetrofitInterface retrofitInterface=retrofit.create(RetrofitInterface.class);
-                Map<String,String> map=new HashMap<>();
-                map.put("id",p.getId());
-                Call<ResponseBody> call=retrofitInterface.delete_po(map);
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                        Log.e("TAG", "response 33: "+response.body()+"id="+p.getId());
-                    }
+                new AlertDialog.Builder(POdetails.this)
+                        .setTitle("Delete PO")
+                        .setMessage("Are you sure you want to Delete PO?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                RetrofitInterface retrofitInterface=retrofit.create(RetrofitInterface.class);
+                                Map<String,String> map=new HashMap<>();
+                                map.put("id",p.getId());
+                                Call<ResponseBody> call=retrofitInterface.delete_po(map);
+                                call.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        Snackbar snackbar = Snackbar
+                                                .make(linearLayout, "PO Deleted Successfully", Snackbar.LENGTH_LONG);
+                                        snackbar.setActionTextColor(Color.RED);
+                                        snackbar.show();
+                                        Log.e("TAG", "response 33: "+response.body()+"id="+p.getId());
+                                    DirectingClass directingClass=new DirectingClass(POdetails.this,POdetails.this);
+                                    directingClass.performLogin();
+                                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(view.getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-                });
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Toast.makeText(view.getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
             }
         });
         long milliseconds=Long.parseLong(p.getGenerationDate());
         Date date = new Date(milliseconds);
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM,yyyy", Locale.ENGLISH);
         gendate.setText("PO created on:"+formatter.format(date));
-        String date1=p.getValidTill();
-        SimpleDateFormat dateFormat= new SimpleDateFormat("dd MMMM,yyyy");
-
-        try {
-            Date d=dateFormat.parse(date1);
-            valid.setText("PO valid till:"+dateFormat.format(d));
+       if(!p.getValidTill().contains("/"))
+        {
+            long valid_milli = Long.parseLong(p.getValidTill());
+            Date date1 = new Date(valid_milli);
+           valid.setText("PO valid till:"+formatter.format(date1));
         }
-        catch(Exception e) {
-            //java.text.ParseException: Unparseable date: Geting error
-            System.out.println("Excep"+e);
-        }
+        else {
+           valid.setText("PO valid till:"+p.getValidTill());
+          }
         quality.setText("Quality:"+p.getQuality());
         quantity.setText("Quantity:"+p.getQuantity());
         requestedby.setText("PO requested by:"+p.getRequestedBy());
@@ -108,4 +136,15 @@ public class POdetails extends AppCompatActivity {
         price.setText("Price:\u20B9"+p.getPrice());
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

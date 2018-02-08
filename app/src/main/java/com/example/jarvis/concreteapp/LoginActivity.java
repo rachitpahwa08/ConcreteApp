@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jarvis.concreteapp.model.Result;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmailView;
     private EditText mPasswordView;
     private Button signin;
+    TextView signup,forgotpass;
     ProgressDialog progressDialog;
     public static final String TAG = LoginActivity.class.getSimpleName();
     private String email,password;
@@ -65,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
         signin = (Button) findViewById(R.id.email_sign_in_button);
         context = this.getApplicationContext();
         session = new SessionManagement(getApplicationContext());
+        signup=(TextView)findViewById(R.id.SignUp);
+        forgotpass=(TextView)findViewById(R.id.forgot_button);
 
         signin.setOnClickListener(new OnClickListener() {
             @Override
@@ -80,6 +84,20 @@ public class LoginActivity extends AppCompatActivity {
                 startSignin();
             }
         });
+        signup.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(LoginActivity.this,SignUp.class);
+                startActivity(intent);
+            }
+        });
+        forgotpass.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(LoginActivity.this,Password_reset.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -90,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         String password=mPasswordView.getText().toString();
 
         if(email.isEmpty()){
-          mEmailView.setError("Email/Phone is Required");
+          mEmailView.setError("Email is Required");
           mEmailView.requestFocus();
           return;
       }
@@ -163,16 +181,7 @@ public class LoginActivity extends AppCompatActivity {
 }
 
 
-    void SignUp(View view)
-    {
-    Intent intent=new Intent(LoginActivity.this,SignUp.class);
-    startActivity(intent);
-    }
-      void forgotPassword(View view)
-     {
-       Intent intent=new Intent(LoginActivity.this,Password_reset.class);
-       startActivity(intent);
-     }
+
 
 }
 

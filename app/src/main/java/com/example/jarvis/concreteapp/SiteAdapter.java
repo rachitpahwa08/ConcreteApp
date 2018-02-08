@@ -1,5 +1,11 @@
 package com.example.jarvis.concreteapp;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +20,7 @@ import com.example.jarvis.concreteapp.model.CustomerSite;
 import com.example.jarvis.concreteapp.model.User;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
 import com.example.jarvis.concreteapp.utils.Constants;
+import com.example.jarvis.concreteapp.utils.DirectingClass;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -37,15 +44,18 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
     Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
     Retrofit retrofit=builder.build();
     RetrofitInterface retrofitInterface=retrofit.create(RetrofitInterface.class);
-private List<CustomerSite> siteList;
-private User user;
-RelativeLayout relativeLayout;
+    private List<CustomerSite> siteList;
+    private User user;
+    RelativeLayout relativeLayout;
+    Context context;
+    Activity activity;
 
-
-    public SiteAdapter(List<CustomerSite> siteList, User user,RelativeLayout relativeLayout) {
+    public SiteAdapter(List<CustomerSite> siteList, User user,RelativeLayout relativeLayout,Context context,Activity activity) {
         this.siteList = siteList;
         this.user=user;
+        this.context=context;
         this.relativeLayout = relativeLayout;
+        this.activity=activity;
     }
 
     @Override
@@ -56,28 +66,48 @@ RelativeLayout relativeLayout;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.sitename.setText("Site Name:"+siteList.get(position).getName());
         holder.siteaddress.setText(siteList.get(position).getAddress());
         holder.deletesite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                Map<String,String> map=new HashMap<>();
-                map.put("userid",user.getId());
-                map.put("siteid",siteList.get(position).getId());
-                Call<ResponseBody> call=retrofitInterface.delete_site(map);
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Toast.makeText(view.getContext(),new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
-                        Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
-                    }
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete this site")
+                        .setMessage("Are you sure you want to delete this site?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(view.getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+                                Map<String,String> map=new HashMap<>();
+                                map.put("userid",user.getId());
+                                map.put("siteid",siteList.get(position).getId());
+                                Call<ResponseBody> call=retrofitInterface.delete_site(map);
+                                call.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        Snackbar snackbar = Snackbar
+                                                .make(relativeLayout, "Site Deleted Successfully", Snackbar.LENGTH_LONG);
+                                        snackbar.setActionTextColor(Color.RED);
+                                        snackbar.show();
+                                        Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
+                                        DirectingClass directingClass=new DirectingClass(context,activity);
+                                        directingClass.performLogin();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Toast.makeText(view.getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
             }
         });
     }

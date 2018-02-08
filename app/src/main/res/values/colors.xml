@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#E74C3C</color>
     <color name="colorPrimaryDark">#E74C3C</color>
-    <color name="colorAccent">#E74C3C</color>
+    <color name="colorAccent">#c84c3c</color>
     <color name="White">#FFFFFF</color>
+    <color name="lightgray">#ededed</color>
 
 </resources>

@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b2"
+    android:background="@drawable/construction"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
         android:paddingTop="10dp">
 
@@ -22,15 +25,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:weightSum="1">
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/fullName"
@@ -39,13 +38,13 @@
                         android:capitalize="sentences"
                         android:ems="10"
                         android:hint="Full Name"
-                        android:inputType="textCapSentences"
-                        />
+                        android:inputType="textCapSentences" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/customerProfile"
@@ -63,7 +62,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/mobile"
@@ -80,7 +80,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/email"
@@ -93,7 +94,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/password"
@@ -106,7 +108,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/confirmPass"
@@ -119,20 +122,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/contractorName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="Contractor Name"
-                        android:inputType="textCapSentences" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/PAN"
@@ -149,7 +140,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#979A9A">
 
                     <EditText
                         android:id="@+id/GSTIN"
@@ -184,8 +176,10 @@
                     android:onClick="gotoLogin"
                     android:paddingBottom="20dp"
                     android:paddingTop="30dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
                     android:text="Already have an Account?LogIn"
-                    android:textColor="#fff" />
+                    android:textColor="#424242" />
 
             </LinearLayout>
 

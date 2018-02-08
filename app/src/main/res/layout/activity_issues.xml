@@ -2,10 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/issue"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/construction"
     android:orientation="vertical"
     tools:context="com.example.jarvis.concreteapp.Issues">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +24,9 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="Issue Title"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColorHint="#504D4D" />
+
         <Spinner
             android:id="@+id/issue_type"
             android:layout_width="match_parent"
@@ -37,8 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Issue Description"
             android:inputType="textMultiLine"
-            android:hint="Issue Description"/>
+            android:textColorHint="#504D4D" />
 
 
         <Button

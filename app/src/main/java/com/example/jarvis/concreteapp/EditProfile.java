@@ -18,7 +18,6 @@ import com.example.jarvis.concreteapp.model.User;
 import com.example.jarvis.concreteapp.network.RetrofitInterface;
 import com.example.jarvis.concreteapp.utils.Constants;
 import com.example.jarvis.concreteapp.utils.DirectingClass;
-import com.example.jarvis.concreteapp.utils.Validation;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -31,25 +30,33 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AddSite extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity {
+     EditText name,email,contact,pan,gst;
+     LinearLayout linearLayout;
     User user;
     private static Retrofit.Builder builder=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit=builder.build();
-    LinearLayout linearLayout;
-    EditText sitename,site_address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_site);
+        setContentView(R.layout.activity_edit_profile);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
-        user=i.getParcelableExtra("User");
-        sitename=(EditText) findViewById(R.id.sitename);
-        site_address=(EditText) findViewById(R.id.site_address);
-        Button submit=(Button)findViewById(R.id.submit_site);
-        linearLayout=(LinearLayout)findViewById(R.id.addsite_layout);
+        user=i.getParcelableExtra("user");
+        name=(EditText)findViewById(R.id.name);
+        email=(EditText)(EditText)findViewById(R.id.email_profile);
+        contact=(EditText)findViewById(R.id.contact_profile);
+        pan=(EditText)findViewById(R.id.pan_profile);
+        gst=(EditText)findViewById(R.id.gst_profile);
+        linearLayout=(LinearLayout)findViewById(R.id.edit_profile);
+        name.setText(user.getName());
+        email.setText(user.getEmail());
+        contact.setText(String.valueOf(user.getContact()));
+        pan.setText(user.getPan());
+        gst.setText(user.getGstin());
+        Button submit=(Button)findViewById(R.id.submit_profile);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,58 +65,69 @@ public class AddSite extends AppCompatActivity {
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-                startAddsite();
+                startEditProfile();
             }
         });
     }
 
-    private void startAddsite()
-    {
-        if(sitename.getText().toString().isEmpty()){
-            sitename.setError("Required Field");
-            sitename.requestFocus();
+    private void startEditProfile() {
+       if(name.getText().toString().isEmpty())
+       {   name.setError("Required Field");
+           name.requestFocus();
+           return;
+       }
+        if(email.getText().toString().isEmpty())
+        {   email.setError("Required Field");
+            email.requestFocus();
             return;
         }
-        if(site_address.getText().toString().isEmpty()){
-            site_address.setError("Required Field");
-            site_address.requestFocus();
+        if(contact.getText().toString().isEmpty())
+        {   contact.setError("Required Field");
+            contact.requestFocus();
             return;
         }
-        submitAddsite(sitename.getText().toString(),site_address.getText().toString());
+        if(pan.getText().toString().isEmpty())
+        {   pan.setError("Required Field");
+            pan.requestFocus();
+            return;
+        }
+        if(gst.getText().toString().isEmpty())
+        {   gst.setError("Required Field");
+            gst.requestFocus();
+            return;
+        }
+        startSubmit();
     }
 
-    private void submitAddsite(String name, String address)
+    private void startSubmit()
     {
         RetrofitInterface retrofitInterface=retrofit.create(RetrofitInterface.class);
         Map<String,String> map=new HashMap<>();
-        map.put("name",name);
-        map.put("lat","0");
-        map.put("long","0");
-        map.put("address",address);
-        map.put("_id",user.getId()
-        );
-        Call<ResponseBody> call=retrofitInterface.add_site(map);
+        map.put("id",user.getId());
+        map.put("name",name.getText().toString());
+        map.put("email",email.getText().toString());
+        map.put("contact",contact.getText().toString());
+        map.put("pan",pan.getText().toString());
+        map.put("gstin",gst.getText().toString());
+        Call<ResponseBody> call=retrofitInterface.edit_profile(map,user.getCustomerSite());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                //Toast.makeText(AddSite.this,new Gson().toJson(response.body()),Toast.LENGTH_SHORT).show();
                 Snackbar snackbar = Snackbar
-                        .make(linearLayout, "Site Added Successfully", Snackbar.LENGTH_LONG);
+                        .make(linearLayout, "Profile Edited Successfully", Snackbar.LENGTH_LONG);
                 snackbar.setActionTextColor(Color.RED);
                 snackbar.show();
                 Log.e("TAG", "response 33: "+new Gson().toJson(response.body()));
-                DirectingClass directingClass=new DirectingClass(getApplicationContext(),AddSite.this);
+                DirectingClass directingClass=new DirectingClass(EditProfile.this,EditProfile.this);
                 directingClass.performLogin();
-
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(AddSite.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfile.this,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

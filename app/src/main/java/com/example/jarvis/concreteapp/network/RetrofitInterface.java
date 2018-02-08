@@ -5,28 +5,23 @@ package com.example.jarvis.concreteapp.network;
  */
 
 
-import com.example.jarvis.concreteapp.model.History;
-import com.example.jarvis.concreteapp.model.PO;
-import com.example.jarvis.concreteapp.model.Response;
-import com.example.jarvis.concreteapp.model.Result;
-import com.example.jarvis.concreteapp.model.User;
+import com.example.jarvis.concreteapp.model.CustomerSite;
 
-import org.json.JSONObject;
+import com.example.jarvis.concreteapp.model.Result;
+
 
 import java.util.Map;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
+
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
+
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
-import rx.Observable;
+
 
 public interface RetrofitInterface {
 
@@ -76,7 +71,7 @@ public interface RetrofitInterface {
 
     @FormUrlEncoded
     @POST("/profile")
-    Call<ResponseBody>edit_profile(@FieldMap Map<String,String> map);
+    Call<ResponseBody>edit_profile(@FieldMap Map<String,String> map, @Field("customerSite")List<CustomerSite> customersite);
 
     @FormUrlEncoded
     @POST("/history")

@@ -43,7 +43,7 @@ public class SiteFragment extends Fragment
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
         Result r1=((DashBoard)getActivity()).r;
-        SiteAdapter siteAdapter=new SiteAdapter(r1.getUser().getCustomerSite(),r1.getUser(),relativeLayout);
+        SiteAdapter siteAdapter=new SiteAdapter(r1.getUser().getCustomerSite(),r1.getUser(),relativeLayout,getContext(),getActivity());
         recyclerView.setAdapter(siteAdapter);
         return view;
     }
